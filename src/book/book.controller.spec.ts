@@ -36,12 +36,19 @@ describe('BookController', () => {
     });
   });
   describe('update', () =>{
-    it('should update and return the updated todo', () => {
+    it('should update and return the updated book', () => {
       mockBookService.publishBook = () => ("Book created!");
       mockBookService.updateBook = () => ({title: 'test', author: 'passed', published: '1924'});
       controller.publishBook({title: 'test', author: 'failed', published: '1924'});
       const update = controller.updateBook({title: 'test', author: 'passed', published: '1924'},{title: 'test', author: 'book', published: '1924'});
       expect(update).toEqual({title: 'test', author: 'passed', published: '1924'});
+    });
+  });
+  describe('delete', ()=> {
+    it("should call bookService.deleteBook() function", () => {
+      mockBookService.deleteBook = jest.fn();
+      controller.deleteBook({title: 'test', author: 'book', published: '1924'});
+      expect(mockBookService.deleteBook).toHaveBeenCalledWith({title: 'test', author: 'book', published: '1924'});
     });
   });
 });

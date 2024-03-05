@@ -28,6 +28,6 @@ export class BookController {
 
   @Delete('/del/:book')
   deleteBook(@Param('book') book: Books){
-    return this.bookService.deleteBook(book);
+    this.bookService.deleteBook(book);
   }
 }
